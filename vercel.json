@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "src": "amerbox_client/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "amerbox_admin/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    { "src": "/", "dest": "amerbox_client/index.html" },
+    { "src": "/track/(.*)", "dest": "amerbox_client/track.html" },
+    { "src": "/admin", "dest": "amerbox_admin/login.html" },
+    { "src": "/admin-panel/(.*)", "dest": "amerbox_admin/index.html" }
+  ]
+}
