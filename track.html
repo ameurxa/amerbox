@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تتبع حالة جهازك — عامر للصيانة والتصليح</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="assets/favicon.png">
+</head>
+<body>
+  <header class="top">
+    <h1>⚙️ عامر للصيانة والتصليح</h1>
+  </header>
+
+  <main class="container">
+    <h2>📱 تتبّع حالة جهازك</h2>
+
+    <form id="trackForm" class="card">
+      <label for="tid">أدخل رقم الوصل أو رمز التتبّع</label>
+      <input id="tid" name="tid" placeholder="AMER-20251101123456" required>
+      <button type="submit">استعلام</button>
+    </form>
+
+    <section id="result" class="card hidden">
+      <h3>نتيجة البحث</h3>
+      <div id="info"></div>
+      <div style="margin-top:12px">
+        <a id="contact" href="tel:0662844874">☎️ الاتصال: 0662844874</a> —
+        <a id="wa" href="https://wa.me/0771338780">💬 واتساب: 0771338780</a>
+      </div>
+      <p class="hint">يرجى التواصل معنا في حال وجود أي استفسار.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>الجلفة، حي أولاد عبيد الله، بناية 156 رقم 12</div>
+    <div>شكرًا لاختياركم عامر للصيانة والتصليح</div>
+  </footer>
+
+<script>
+// عند الضغط على "استعلام": سنحاول الاتصال بAPI ثم نعرض نتيجة تجريبية إن لم تتوافر API
+document.getElementById('trackForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const tid = document.getElementById('tid').value.trim();
+  if(!tid) return;
+
+  // نظهر رسالة تحميل بسيطة
+  const info = document.getElementById('info');
+  info.innerHTML = '<em>جاري جلب المعلومات...</em>';
+  document.getElementById('result').classList.remove('hidden');
+
+  try{
+    // ⚠️ هنا مثال على طلب إلى API خاص بك (ستستبدل بالرابط الفعلي لاحقًا)
+    // let res = await fetch(`https://api.yoursite.com/track?tid=${encodeURIComponent(tid)}`);
+    // let data = await res.json();
+
+    // مؤقت: جواب تجريبي - استبدل هذا بقيمة data من API حقيقية لاحقًا
+    const data = {
+      tracking_id: tid,
+      customer_name: "أحمد بن عامر",
+      phone: "0662844874",
+      device_desc: "هاتف ذكي - Samsung",
+      status: "قيد التصليح",
+      updated_at: new Date().toLocaleString('ar-EG'),
+      notes: "تم البدء بالفحص"
+    };
+
+    info.innerHTML = `
+      <p><strong>رقم التتبّع:</strong> ${data.tracking_id}</p>
+      <p><strong>اسم الزبون:</strong> ${data.customer_name}</p>
+      <p><strong>هاتف:</strong> ${data.phone}</p>
+      <p><strong>وصف الجهاز:</strong> ${data.device_desc}</p>
+      <p><strong>الحالة:</strong> ${data.status}</p>
+      <p><strong>آخر تحديث:</strong> ${data.updated_at}</p>
+      <p><strong>ملاحظات:</strong> ${data.notes}</p>
+    `;
+  } catch(err){
+    info.innerHTML = '<span style="color:#c00">حدث خطأ أثناء الاستعلام، حاول لاحقًا.</span>';
+    console.error(err);
+  }
+});
+</script>
+</body>
+</html>
+track.html
