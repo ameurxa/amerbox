@@ -1,6 +1,4 @@
-{
-  "version": 2,
-  "projects": [
+
     {
       "src": "amerbox_client/**",
       "use": "@vercel/static"
