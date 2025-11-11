@@ -1,17 +1,24 @@
-
+{
+  "version": 2,
+  "name": "amerbox",
+  "builds": [
     {
-      "src": "amerbox_client/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "amerbox_admin/**",
+      "src": "index.html",
       "use": "@vercel/static"
     }
   ],
   "routes": [
-    { "src": "/", "dest": "amerbox_client/index.html" },
-    { "src": "/track/(.*)", "dest": "amerbox_client/track.html" },
-    { "src": "/admin", "dest": "amerbox_admin/login.html" },
-    { "src": "/admin-panel/(.*)", "dest": "amerbox_admin/index.html" }
-  ]
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "APP_NAME": "عامر بوكس",
+    "APP_DESCRIPTION": "نظام إلكتروني لتتبع حالة الأجهزة وإدارة الصيانة عبر الإنترنت.",
+    "SUPPORT_PHONE": "0662844874",
+    "SUPPORT_WHATSAPP": "0771338780",
+    "WORKSHOP_NAME": "ورشة عامر للصيانة والتصليح"
+  }
 }
+
